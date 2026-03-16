@@ -215,14 +215,43 @@ def lightbox():
   <div class="lb-img-wrap"><img id="lbImg" src="" alt="Enlarged view" /></div>
 </div>"""
 
-def html_head(title, desc=""):
+SITE_URL   = "https://famadinspection.vercel.app"
+OG_IMAGE   = f"{SITE_URL}/PICTURE%20FOLDER/FAMAD-FACILITY/FAMAD-FACILITY-ANGLE1.JPG"
+OG_DEFAULT = "Technical evaluation of roofing systems and structural integrity for the FAMAD PLC industrial facility, Ojota, Lagos."
+
+def html_head(title, desc="", og_image=None):
+    full_title = f"{title} — FAMAD PLC Roofing Inspection"
+    og_desc    = desc or OG_DEFAULT
+    og_img     = og_image or OG_IMAGE
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} &mdash; FAMAD PLC Roofing Inspection</title>
-  <meta name="description" content="{desc}" />
+  <title>{full_title}</title>
+  <meta name="description" content="{og_desc}" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/zealet-logo.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/img/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="assets/img/favicon-512.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="FAMAD PLC Roofing Inspection" />
+  <meta property="og:title"       content="{full_title}" />
+  <meta property="og:description" content="{og_desc}" />
+  <meta property="og:image"       content="{og_img}" />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height"content="1080" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="{full_title}" />
+  <meta name="twitter:description" content="{og_desc}" />
+  <meta name="twitter:image"       content="{og_img}" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
@@ -892,6 +921,69 @@ def gen_structure(s, prev_s, next_s):
 {footer()}
 {html_foot()}"""
 
+# ─── Page: 404.html ───────────────────────────────────────────────────────────
+
+def gen_404():
+    return f"""{html_head("Page Not Found", "The page you are looking for could not be found.")}
+{nav("")}
+
+<div class="page-hero page-hero--overview" style="min-height:60vh;">
+  <img src="PICTURE FOLDER/FAMAD-FACILITY/FAMAD-FACILITY-ANGLE1.JPG" alt="FAMAD Facility" class="page-hero-img" />
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content container" style="text-align:center;">
+    <div style="font-size:6rem; font-weight:900; color:var(--orange); line-height:1; margin-bottom:12px;">404</div>
+    <h1 class="page-hero-title" style="font-size:2rem;">Page Not Found</h1>
+    <p class="page-hero-sub" style="max-width:480px; margin:0 auto 28px;">The page you&rsquo;re looking for doesn&rsquo;t exist or may have been moved.</p>
+    <a href="index.html" style="display:inline-block; background:var(--orange); color:#fff; font-weight:700; padding:14px 32px; border-radius:8px; text-decoration:none; font-size:1rem;">
+      &larr; Back to Home
+    </a>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="text-align:center; padding: 40px 20px;">
+    <div class="section-label">Quick Navigation</div>
+    <h2 class="section-title">Where would you like to go?</h2>
+    <div class="landing-cards" style="margin-top:28px;">
+      <a href="overview.html" class="lcard">
+        <div class="lcard-body">
+          <span class="lcard-num">01</span>
+          <h3>Facility Overview</h3>
+          <p>Site history, land area, and strategic positioning.</p>
+          <span class="lcard-arrow">View &rarr;</span>
+        </div>
+      </a>
+      <a href="structures.html" class="lcard">
+        <div class="lcard-body">
+          <span class="lcard-num">04</span>
+          <h3>Structure Reports</h3>
+          <p>Individual records for all 20 structures A&ndash;T.</p>
+          <span class="lcard-arrow">View &rarr;</span>
+        </div>
+      </a>
+      <a href="defects.html" class="lcard">
+        <div class="lcard-body">
+          <span class="lcard-num">05</span>
+          <h3>Defects Register</h3>
+          <p>Photographic documentation of recorded defects.</p>
+          <span class="lcard-arrow">View &rarr;</span>
+        </div>
+      </a>
+      <a href="maintenance.html" class="lcard">
+        <div class="lcard-body">
+          <span class="lcard-num">06</span>
+          <h3>Maintenance Report</h3>
+          <p>Condition ratings and priority remediation schedule.</p>
+          <span class="lcard-arrow">View &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{footer()}
+{html_foot()}"""
+
 # ─── Generate All Files ───────────────────────────────────────────────────────
 
 def write(filename, content):
@@ -908,10 +1000,11 @@ if __name__ == "__main__":
     write("environment.html",  gen_environment())
     write("calculations.html", gen_calculations())
     write("structures.html",   gen_structures())
+    write("404.html",          gen_404())
 
     for i, s in enumerate(STRUCTURES):
         prev_s = STRUCTURES[i - 1] if i > 0 else None
         next_s = STRUCTURES[i + 1] if i < len(STRUCTURES) - 1 else None
         write(struct_filename(s["label"]), gen_structure(s, prev_s, next_s))
 
-    print(f"\nDone — {5 + len(STRUCTURES)} pages generated.")
+    print(f"\nDone -- {6 + len(STRUCTURES)} pages generated.")
