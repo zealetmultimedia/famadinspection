@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Material Estimation — Structure E: FAMAD Factory &mdash; FAMAD PLC Roofing Inspection</title>
+  <meta name="description" content="Roof material estimation for Structure E: FAMAD Factory main roof. Excludes roof sheeting. Covers purlins, ridge capping, gutters, flashings, fasteners, insulation and ancillary items." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── Estimation page specific styles ── */
+    .est-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0f2744 100%);
+      padding: 120px 0 60px;
+      text-align: center;
+    }
+    .est-hero-label {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+    .est-hero h1 {
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      margin: 0 0 10px;
+      line-height: 1.15;
+    }
+    .est-hero p {
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      margin: 0 auto 28px;
+      max-width: 640px;
+    }
+    .est-hero-meta {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .est-hero-meta span {
+      color: rgba(255,255,255,0.60);
+      font-size: 0.82rem;
+    }
+    .est-hero-meta strong {
+      color: var(--orange);
+      font-size: 1.05rem;
+      display: block;
+      font-weight: 700;
+    }
+
+    /* Geometry assumptions card */
+    .geom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 28px 0 0;
+    }
+    .geom-item {
+      background: var(--navy);
+      border-radius: 10px;
+      padding: 18px 20px;
+      text-align: center;
+    }
+    .geom-val {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--orange);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.1;
+    }
+    .geom-lbl {
+      display: block;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.62);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .geom-note {
+      background: rgba(249,115,22,0.08);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-top: 22px;
+      font-size: 0.87rem;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* Estimation table */
+    .est-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      margin-top: 28px;
+    }
+    .est-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .est-table thead th {
+      background: var(--navy);
+      color: #fff;
+      padding: 13px 14px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .est-table thead th:not(:first-child) {
+      text-align: right;
+    }
+    .est-table thead th.th-left {
+      text-align: left;
+    }
+    .est-table tbody tr:nth-child(even) { background: #f9fafb; }
+    .est-table tbody tr:hover { background: rgba(249,115,22,0.05); }
+    .est-table tbody td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: middle;
+      color: var(--slate);
+    }
+    .est-table tbody td.td-right {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .est-table tbody td.td-unit {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+    .est-table tbody td.td-supply {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      color: var(--orange);
+    }
+    .est-table tbody td.td-note {
+      font-size: 0.78rem;
+      color: #6b7280;
+      font-style: italic;
+    }
+    /* Category heading row */
+    .est-table tbody tr.cat-row td {
+      background: #1e3a5f;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 9px 14px;
+      border-bottom: none;
+    }
+    .est-table tbody tr.cat-row:hover { background: #1e3a5f; }
+
+    /* Summary totals */
+    .est-totals {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .est-total-card {
+      border: 2px solid var(--navy);
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-align: center;
+    }
+    .est-total-card .et-val {
+      font-size: 1.5rem;
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .est-total-card .et-lbl {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .est-total-card.highlight { border-color: var(--orange); }
+    .est-total-card.highlight .et-val { color: var(--orange); }
+
+    /* Print button */
+    .est-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 28px;
+    }
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-print:hover { background: #0f2744; }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--navy);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--navy);
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .btn-back:hover { background: var(--navy); color: #fff; }
+
+    /* Section dark background override */
+    .section-dark { background: var(--navy); }
+    .section-dark .section-label { color: var(--orange); }
+    .section-dark .section-title { color: #fff; }
+    .section-dark .section-intro { color: rgba(255,255,255,0.65); }
+    .section-dark .geom-item { background: rgba(255,255,255,0.07); }
+
+    @media print {
+      .navbar, .est-hero, .est-actions, .struct-nav-bar, .footer, .lightbox { display: none !important; }
+      .est-table { font-size: 0.78rem; }
+      .section { padding: 20px 0; }
+    }
+    @media (max-width: 640px) {
+      .est-table thead th, .est-table tbody td { padding: 9px 8px; font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="brand-tag">FAMAD PLC</span>
+      <span class="brand-sub">Roofing Inspection Report</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="overview.html">Overview</a></li>
+      <li><a href="environment.html">Environment</a></li>
+      <li><a href="calculations.html">Roof Areas</a></li>
+      <li><a href="structures.html" class="active">Structures</a></li>
+      <li><a href="defects.html">Defects</a></li>
+      <li><a href="maintenance.html">Maintenance</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="est-hero">
+  <div class="container">
+    <div class="est-hero-label">Material Estimation &mdash; Excludes Roof Sheets</div>
+    <h1>Structure E: FAMAD Factory<br/>Main Roof &mdash; Ancillary Materials</h1>
+    <p>Quantity take-off for all roofing components excluding the primary roof sheeting panels.
+       All quantities include a 10% material waste allowance unless otherwise stated.</p>
+    <nav class="breadcrumb" style="justify-content:center; margin-top:18px;">
+      <a href="index.html">Home</a>
+      <span class="bc-sep">/</span>
+      <a href="structures.html">Structures</a>
+      <span class="bc-sep">/</span>
+      <a href="structure-e.html">E: FAMAD Factory</a>
+      <span class="bc-sep">/</span>
+      <span>Material Estimation</span>
+    </nav>
+    <div class="est-hero-meta">
+      <span><strong>13,868.07 m&sup2;</strong>Total Roof Area</span>
+      <span><strong>18&deg;</strong>Roof Pitch</span>
+      <span><strong>1.0515</strong>Slope Factor</span>
+      <span><strong>1,209 m</strong>Total Ridge Length</span>
+      <span><strong>415.58 m</strong>Eaves Perimeter</span>
+    </div>
+  </div>
+</div>
+
+<!-- GEOMETRY ASSUMPTIONS -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-label">Basis of Calculation</div>
+    <h2 class="section-title">Roof Geometry &amp; Assumptions</h2>
+    <p class="section-intro">All quantities are derived from the aerial photogrammetric survey and dimensional inspection. Values to be verified against structural drawings prior to procurement.</p>
+
+    <div class="geom-grid">
+      <div class="geom-item">
+        <span class="geom-val">12,963.32 m&sup2;</span>
+        <span class="geom-lbl">Plan Footprint</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">13,868.07 m&sup2;</span>
+        <span class="geom-lbl">Roof Area (sloped)</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">18&deg;</span>
+        <span class="geom-lbl">Roof Pitch</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">1.0515</span>
+        <span class="geom-lbl">Slope Factor (1/cos 18&deg;)</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">8.83 m</span>
+        <span class="geom-lbl">Rafter Half-Span (plan)</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">9.284 m</span>
+        <span class="geom-lbl">Rafter Length (slope)</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">13</span>
+        <span class="geom-lbl">Roof Bays</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">93 m</span>
+        <span class="geom-lbl">Ridge Length per Bay</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">1,209 m</span>
+        <span class="geom-lbl">Total Ridge Length</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">415.58 m</span>
+        <span class="geom-lbl">Eaves Perimeter (calc.)</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">464.581 m</span>
+        <span class="geom-lbl">Building Perimeter (survey)</span>
+      </div>
+      <div class="geom-item">
+        <span class="geom-val">10%</span>
+        <span class="geom-lbl">Waste Allowance</span>
+      </div>
+    </div>
+
+    <div class="geom-note">
+      <strong>Note:</strong> Ridge length is calculated as 13 bays &times; 93 m = 1,209 m. Eaves perimeter is calculated as
+      2 &times; 93 m + 2 &times; 13 &times; 8.83 m = 186 + 229.58 = 415.58 m. The surveyed building perimeter
+      (464.581 m) is used as the basis for wall flashing quantities. All purlin quantities are derived from
+      total sloped roof area divided by purlin spacing. Downpipe count is based on 15 m maximum spacing
+      along eaves. Quantities <strong>exclude roof sheeting panels</strong>; a separate schedule should be prepared for primary roof sheets.
+    </div>
+  </div>
+</section>
+
+<!-- ESTIMATION TABLE -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">Quantity Take-Off</div>
+    <h2 class="section-title">Material Estimation Schedule</h2>
+    <p class="section-intro">
+      Organised by trade category. Net quantity = calculated amount. Supply quantity = net quantity &times; 1.10 (waste)
+      rounded up to nearest whole supply unit, except where noted.
+    </p>
+
+    <div class="est-actions">
+      <button class="btn-print" onclick="window.print()">&#128438; Print / Save PDF</button>
+      <a href="structure-e.html" class="btn-back">&larr; Back to Structure E</a>
+    </div>
+
+    <div class="est-table-wrap">
+      <table class="est-table">
+        <thead>
+          <tr>
+            <th class="th-left" style="width:3%">#</th>
+            <th class="th-left" style="width:24%">Item / Description</th>
+            <th class="th-left" style="width:22%">Basis of Quantity</th>
+            <th style="width:10%">Net Qty</th>
+            <th class="th-left" style="width:7%">Unit</th>
+            <th style="width:10%">+10% Waste</th>
+            <th style="width:9%">Supply Unit</th>
+            <th style="width:9%">Supply Qty</th>
+            <th class="th-left" style="width:6%">Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- A: SECONDARY STEELWORK -->
+          <tr class="cat-row"><td colspan="9">A &mdash; Secondary Steelwork (Purlins)</td></tr>
+
+          <tr>
+            <td>A1</td>
+            <td>C-Purlins, 150 &times; 65 &times; 20 &times; 2.0 mm galvanised steel</td>
+            <td>Roof area (13,868 m&sup2;) &divide; purlin spacing (1.50 m c/c) = 9,245 LM</td>
+            <td class="td-right">9,245</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">10,170</td>
+            <td class="td-unit">6 m length</td>
+            <td class="td-supply">1,695</td>
+            <td class="td-note">Pcs</td>
+          </tr>
+          <tr>
+            <td>A2</td>
+            <td>Purlin cleats / anti-sag rods and ties</td>
+            <td>1 set per 3 purlin rows &times; 2 sides &times; 13 bays = allow 1 set per bay</td>
+            <td class="td-right">13</td>
+            <td class="td-unit">Sets</td>
+            <td class="td-right">15</td>
+            <td class="td-unit">Set</td>
+            <td class="td-supply">15</td>
+            <td class="td-note">Confirm with engineer</td>
+          </tr>
+
+          <!-- B: RIDGE SYSTEM -->
+          <tr class="cat-row"><td colspan="9">B &mdash; Ridge System</td></tr>
+
+          <tr>
+            <td>B1</td>
+            <td>Ridge capping, colorbond pre-painted steel, 500 mm wide</td>
+            <td>Total ridge length = 1,209 m</td>
+            <td class="td-right">1,209</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">1,330</td>
+            <td class="td-unit">2 m length</td>
+            <td class="td-supply">665</td>
+            <td class="td-note">Pcs</td>
+          </tr>
+          <tr>
+            <td>B2</td>
+            <td>Ridge foam closure strip (profiled, to match sheet profile)</td>
+            <td>Ridge capping length = 1,209 m; 1 strip per LM</td>
+            <td class="td-right">1,209</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">1,330</td>
+            <td class="td-unit">1 m strip</td>
+            <td class="td-supply">1,330</td>
+            <td class="td-note">Pcs</td>
+          </tr>
+          <tr>
+            <td>B3</td>
+            <td>Ridge end-cap covers (pressed steel)</td>
+            <td>Allow 2 per bay end = 13 bays &times; 2 = 26 ends; +10%</td>
+            <td class="td-right">26</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">29</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">30</td>
+            <td class="td-note">Pcs; verify bay count</td>
+          </tr>
+          <tr>
+            <td>B4</td>
+            <td>Ridge fixing screws (6.3 &times; 65 mm hex head, Type 17)</td>
+            <td>4 fixings per LM of ridge capping; 1,209 m &times; 4 = 4,836 pcs; +5%</td>
+            <td class="td-right">4,836</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">5,078</td>
+            <td class="td-unit">Box / 100</td>
+            <td class="td-supply">51</td>
+            <td class="td-note">Boxes</td>
+          </tr>
+
+          <!-- C: EAVES GUTTER SYSTEM -->
+          <tr class="cat-row"><td colspan="9">C &mdash; Eaves Gutter System</td></tr>
+
+          <tr>
+            <td>C1</td>
+            <td>Half-round eaves gutter, 150 mm, UPVC or aluminium</td>
+            <td>Eaves perimeter = 415.58 m</td>
+            <td class="td-right">415.58</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">457.14</td>
+            <td class="td-unit">3 m length</td>
+            <td class="td-supply">153</td>
+            <td class="td-note">Lengths</td>
+          </tr>
+          <tr>
+            <td>C2</td>
+            <td>Gutter fascia brackets (at 1.0 m c/c)</td>
+            <td>Supply gutter LM = 457 m; 1 bracket per 1.0 m</td>
+            <td class="td-right">457</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">&mdash;</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">457</td>
+            <td class="td-note">No additional waste</td>
+          </tr>
+          <tr>
+            <td>C3</td>
+            <td>Gutter union / jointing pieces (slip joint connectors)</td>
+            <td>1 per 3 m gutter length; 457 m &divide; 3 = 153 joints</td>
+            <td class="td-right">153</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">168</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">168</td>
+            <td class="td-note">Pcs</td>
+          </tr>
+          <tr>
+            <td>C4</td>
+            <td>Gutter stop-end caps (square end plate)</td>
+            <td>Allow 2 per gutter run; estimate 20 separate gutter runs</td>
+            <td class="td-right">40</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">44</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">44</td>
+            <td class="td-note">Verify no. of runs</td>
+          </tr>
+          <tr>
+            <td>C5</td>
+            <td>Gutter outlet / downpipe spigot (swan-neck connection)</td>
+            <td>1 per downpipe position; see downpipe count (C7)</td>
+            <td class="td-right">28</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">31</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">31</td>
+            <td class="td-note">Match to C7</td>
+          </tr>
+
+          <!-- DOWNPIPES -->
+          <tr class="cat-row"><td colspan="9">D &mdash; Downpipes</td></tr>
+
+          <tr>
+            <td>D1</td>
+            <td>Round downpipe, 100 mm &Oslash;, UPVC or galvanised steel</td>
+            <td>Eaves 415.58 m &divide; 15 m max. spacing = 27.7; round to 28 pipes &times; 4.0 m drop = 112 LM</td>
+            <td class="td-right">112</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">123</td>
+            <td class="td-unit">3 m length</td>
+            <td class="td-supply">41</td>
+            <td class="td-note">Lengths; 28 pipes</td>
+          </tr>
+          <tr>
+            <td>D2</td>
+            <td>Downpipe offset bends / elbows (91&deg; or 112&deg;)</td>
+            <td>2 bends per pipe (top offset + bottom turn) &times; 28 pipes</td>
+            <td class="td-right">56</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">62</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">62</td>
+            <td class="td-note">Pcs</td>
+          </tr>
+          <tr>
+            <td>D3</td>
+            <td>Downpipe shoes (bottom discharge shoe)</td>
+            <td>1 per downpipe; 28 pipes</td>
+            <td class="td-right">28</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">31</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">31</td>
+            <td class="td-note">Pcs</td>
+          </tr>
+          <tr>
+            <td>D4</td>
+            <td>Downpipe pipe clips / wall brackets (at 1.2 m c/c)</td>
+            <td>28 pipes &times; (4.0 m &divide; 1.2 m) = 28 &times; 4 = 112 clips</td>
+            <td class="td-right">112</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">124</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">124</td>
+            <td class="td-note">Pcs</td>
+          </tr>
+
+          <!-- E: FLASHINGS -->
+          <tr class="cat-row"><td colspan="9">E &mdash; Flashings</td></tr>
+
+          <tr>
+            <td>E1</td>
+            <td>Eaves / drip edge flashing, pre-painted steel, 150 &times; 50 mm</td>
+            <td>Eaves perimeter = 415.58 m</td>
+            <td class="td-right">415.58</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">457.14</td>
+            <td class="td-unit">2 m length</td>
+            <td class="td-supply">229</td>
+            <td class="td-note">Pieces</td>
+          </tr>
+          <tr>
+            <td>E2</td>
+            <td>Barge / verge flashing, pre-painted steel, 200 &times; 100 mm</td>
+            <td>Gable ends: 2 ends &times; 2 slopes &times; 9.284 m rafter = 37.14 m; allow for 13 bays &times; 2 internal gable dividers (if applicable)</td>
+            <td class="td-right">37.14</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">40.85</td>
+            <td class="td-unit">2 m length</td>
+            <td class="td-supply">21</td>
+            <td class="td-note">Minimum; verify bay separation</td>
+          </tr>
+          <tr>
+            <td>E3</td>
+            <td>Wall apron / step flashing (where roof abuts walls), pre-painted steel, 250 &times; 100 mm</td>
+            <td>Building perimeter (survey) = 464.581 m</td>
+            <td class="td-right">464.58</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">511.04</td>
+            <td class="td-unit">2 m length</td>
+            <td class="td-supply">256</td>
+            <td class="td-note">Pieces</td>
+          </tr>
+          <tr>
+            <td>E4</td>
+            <td>Valley / internal gutter flashing (where roof planes meet)</td>
+            <td>Subject to roof configuration; provisional allowance</td>
+            <td class="td-right">TBC</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">&mdash;</td>
+            <td class="td-unit">&mdash;</td>
+            <td class="td-supply">TBC</td>
+            <td class="td-note">Confirm roof layout</td>
+          </tr>
+
+          <!-- F: FOAM CLOSURES & SEALING -->
+          <tr class="cat-row"><td colspan="9">F &mdash; Foam Closures &amp; Sealing</td></tr>
+
+          <tr>
+            <td>F1</td>
+            <td>Eaves foam closure strip (profiled, to match sheet profile)</td>
+            <td>Eaves perimeter = 415.58 m; 1 strip per LM</td>
+            <td class="td-right">415.58</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">457.14</td>
+            <td class="td-unit">1 m strip</td>
+            <td class="td-supply">457</td>
+            <td class="td-note">Pieces</td>
+          </tr>
+          <tr>
+            <td>F2</td>
+            <td>Butyl lap sealant tape, 40 mm &times; 3 mm self-adhesive</td>
+            <td>Sheet side-lap sealing along ridge and eaves; allow 1,209 m ridge + 415.58 m eaves = 1,624.58 m</td>
+            <td class="td-right">1,624.58</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">1,787</td>
+            <td class="td-unit">10 m roll</td>
+            <td class="td-supply">179</td>
+            <td class="td-note">Rolls</td>
+          </tr>
+          <tr>
+            <td>F3</td>
+            <td>General-purpose butyl mastic tape, 50 mm wide (flashing perimeter sealing)</td>
+            <td>All flashing edges: eaves (415.58 m) + wall apron (464.58 m) + ridge (1,209 m) = 2,089 m</td>
+            <td class="td-right">2,089</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">2,298</td>
+            <td class="td-unit">10 m roll</td>
+            <td class="td-supply">230</td>
+            <td class="td-note">Rolls</td>
+          </tr>
+          <tr>
+            <td>F4</td>
+            <td>Neutral-cure silicone sealant (for penetrations, end laps, and joints)</td>
+            <td>Allow 1 cartridge per 20 m of ridge + eaves flashing = 2,089 m &divide; 20 = 105 cartridges; round up</td>
+            <td class="td-right">105</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">116</td>
+            <td class="td-unit">Cartridge (310 mL)</td>
+            <td class="td-supply">120</td>
+            <td class="td-note">Allow 10 per carton = 12 cartons</td>
+          </tr>
+
+          <!-- G: INSULATION -->
+          <tr class="cat-row"><td colspan="9">G &mdash; Thermal / Anti-Condensation Layer</td></tr>
+
+          <tr>
+            <td>G1</td>
+            <td>Anti-condensation underlay blanket, 10 mm polypropylene fleece / glass-fibre, foil-faced</td>
+            <td>Sloped roof area = 13,868.07 m&sup2;; +5% waste (overlap allowance)</td>
+            <td class="td-right">13,868.07</td>
+            <td class="td-unit">m&sup2;</td>
+            <td class="td-right">14,561</td>
+            <td class="td-unit">m&sup2; (roll)</td>
+            <td class="td-supply">14,561</td>
+            <td class="td-note">Specify roll width to match sheet</td>
+          </tr>
+          <tr>
+            <td>G2</td>
+            <td>Underlay fixing tape (for anti-condensation blanket joints)</td>
+            <td>Allow 1 roll (50 m) per 200 m&sup2; of roof area</td>
+            <td class="td-right">69.34</td>
+            <td class="td-unit">rolls</td>
+            <td class="td-right">76</td>
+            <td class="td-unit">50 m roll</td>
+            <td class="td-supply">76</td>
+            <td class="td-note">Rolls</td>
+          </tr>
+
+          <!-- H: FASTENERS -->
+          <tr class="cat-row"><td colspan="9">H &mdash; Fasteners &amp; Fixings</td></tr>
+
+          <tr>
+            <td>H1</td>
+            <td>Self-drilling roofing screws, 6.3 &times; 75 mm, hex head, Type 17 point (sheet-to-purlin)</td>
+            <td>8 fasteners per m&sup2; of roof area; 8 &times; 13,868 m&sup2; = 110,944 pcs; +5% cutting waste</td>
+            <td class="td-right">110,944</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">116,491</td>
+            <td class="td-unit">Box / 1,000</td>
+            <td class="td-supply">117</td>
+            <td class="td-note">Boxes</td>
+          </tr>
+          <tr>
+            <td>H2</td>
+            <td>EPDM bonded sealing washers, 19 mm, to match H1 screws</td>
+            <td>1 per screw; 116,491 pcs</td>
+            <td class="td-right">116,491</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">&mdash;</td>
+            <td class="td-unit">Box / 1,000</td>
+            <td class="td-supply">117</td>
+            <td class="td-note">Boxes; supplied with H1</td>
+          </tr>
+          <tr>
+            <td>H3</td>
+            <td>Lap screws / flashing screws, 5.5 &times; 25 mm, pan head (sheet-to-sheet side laps)</td>
+            <td>2 per LM of roof length along laps; roof area &divide; sheet cover width (0.762 m) = 18,200 LM of lap &times; 2 = 36,400; +5%</td>
+            <td class="td-right">36,400</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">38,220</td>
+            <td class="td-unit">Box / 1,000</td>
+            <td class="td-supply">39</td>
+            <td class="td-note">Boxes</td>
+          </tr>
+          <tr>
+            <td>H4</td>
+            <td>Structural bolts, M12 &times; 50 mm, with nuts and flat washers (purlin-to-rafter connections)</td>
+            <td>Allow 4 bolts per purlin &times; 1,695 purlins = 6,780 sets; +5%</td>
+            <td class="td-right">6,780</td>
+            <td class="td-unit">Sets</td>
+            <td class="td-right">7,119</td>
+            <td class="td-unit">Set</td>
+            <td class="td-supply">7,200</td>
+            <td class="td-note">Round to nearest 100</td>
+          </tr>
+
+          <!-- I: ACCESSORIES -->
+          <tr class="cat-row"><td colspan="9">I &mdash; Accessories &amp; Sundries</td></tr>
+
+          <tr>
+            <td>I1</td>
+            <td>Roof ventilators / ridge vents (natural ventilation)</td>
+            <td>Allow 1 per 150 m&sup2; of floor area; 12,963 m&sup2; &divide; 150 = 86 units</td>
+            <td class="td-right">86</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">95</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">95</td>
+            <td class="td-note">Confirm with mechanical</td>
+          </tr>
+          <tr>
+            <td>I2</td>
+            <td>Translucent / polycarbonate rooflights (natural daylighting)</td>
+            <td>Allow 5% of roof area = 13,868 &times; 0.05 = 693 m&sup2;</td>
+            <td class="td-right">693</td>
+            <td class="td-unit">m&sup2;</td>
+            <td class="td-right">762</td>
+            <td class="td-unit">m&sup2;</td>
+            <td class="td-supply">762</td>
+            <td class="td-note">Verify with client brief</td>
+          </tr>
+          <tr>
+            <td>I3</td>
+            <td>Pipe / services penetration flashing collars (150 mm &Oslash;)</td>
+            <td>Provisional allowance &mdash; to be confirmed from M&amp;E drawings</td>
+            <td class="td-right">TBC</td>
+            <td class="td-unit">No.</td>
+            <td class="td-right">&mdash;</td>
+            <td class="td-unit">Each</td>
+            <td class="td-supply">TBC</td>
+            <td class="td-note">Coordinated with M&amp;E</td>
+          </tr>
+          <tr>
+            <td>I4</td>
+            <td>Safety walkway / roof access planks (GRP grating, 300 mm wide)</td>
+            <td>Allow along ridge: 1,209 m total ridge; one walkway per bay = 1,209 LM</td>
+            <td class="td-right">1,209</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">1,330</td>
+            <td class="td-unit">LM</td>
+            <td class="td-supply">1,330</td>
+            <td class="td-note">Subject to HSE requirements</td>
+          </tr>
+          <tr>
+            <td>I5</td>
+            <td>Bird / vermin mesh (at eaves opening between sheet profile and fascia)</td>
+            <td>Eaves perimeter = 415.58 m; 1 strip per LM</td>
+            <td class="td-right">415.58</td>
+            <td class="td-unit">LM</td>
+            <td class="td-right">457</td>
+            <td class="td-unit">LM roll</td>
+            <td class="td-supply">457</td>
+            <td class="td-note">LM of 300 mm wide roll</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <h3 style="margin-top:40px; font-size:1.1rem; color:var(--navy); font-weight:700;">Key Quantity Summary</h3>
+    <div class="est-totals">
+      <div class="est-total-card highlight">
+        <div class="et-val">13,868 m&sup2;</div>
+        <div class="et-lbl">Total Roof Area</div>
+      </div>
+      <div class="est-total-card">
+        <div class="et-val">1,695 pcs</div>
+        <div class="et-lbl">C-Purlins (6 m)</div>
+      </div>
+      <div class="est-total-card">
+        <div class="et-val">665 pcs</div>
+        <div class="et-lbl">Ridge Capping (2 m)</div>
+      </div>
+      <div class="est-total-card">
+        <div class="et-val">153 lengths</div>
+        <div class="et-lbl">Eaves Gutters (3 m)</div>
+      </div>
+      <div class="est-total-card">
+        <div class="et-val">28 pipes</div>
+        <div class="et-lbl">Downpipes</div>
+      </div>
+      <div class="est-total-card">
+        <div class="et-val">256 pcs</div>
+        <div class="et-lbl">Wall Apron Flashing (2 m)</div>
+      </div>
+      <div class="est-total-card">
+        <div class="et-val">14,561 m&sup2;</div>
+        <div class="et-lbl">Anti-Condensation Blanket</div>
+      </div>
+      <div class="est-total-card highlight">
+        <div class="et-val">117 boxes</div>
+        <div class="et-lbl">Roofing Screws (1,000 / box)</div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="geom-note" style="margin-top:32px; background:rgba(30,58,95,0.06); border-color:var(--navy);">
+      <strong>Disclaimer:</strong> This estimation is based on aerial photogrammetric survey data and dimensional inspection measurements.
+      All quantities should be verified by a suitably qualified quantity surveyor against approved structural and architectural drawings
+      before issuing for tender or procurement. Items marked <strong>TBC</strong> require confirmation of detailed design information.
+      This schedule <strong>excludes</strong> the primary roof sheeting panels, structural steel frames (portal/rafter), and any civil or substructure works.
+    </div>
+
+    <div class="est-actions" style="margin-top:24px;">
+      <button class="btn-print" onclick="window.print()">&#128438; Print / Save PDF</button>
+      <a href="structure-e.html" class="btn-back">&larr; Back to Structure E</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PREV / NEXT -->
+<div class="struct-nav-bar">
+  <div class="container">
+    <a href="structure-e.html" class="struct-nav-btn prev">&larr; Structure E: FAMAD Factory</a>
+    <a href="structures.html" class="struct-nav-all">All Structures</a>
+    <a href="calculations.html" class="struct-nav-btn next">Roof Area Calculations &rarr;</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-tag">FAMAD PLC</span>
+        <p>Technical Evaluation of Roofing Systems and Structural Integrity</p>
+        <p class="footer-addr">Kilometer 15, Ikorodu Road, Ojota, Lagos, Nigeria</p>
+      </div>
+      <div class="footer-info">
+        <h4>Report Summary</h4>
+        <ul>
+          <li>Total Land Area: 56,819.28 m&sup2;</li>
+          <li>Site Perimeter: 967.12 m</li>
+          <li>Structures Inspected: 20</li>
+          <li>Factory Roof Area: 13,868.07 m&sup2;</li>
+          <li>Year Established: 1960</li>
+        </ul>
+      </div>
+      <div class="footer-info">
+        <h4>Estimation Scope</h4>
+        <ul>
+          <li>Secondary Steelwork (Purlins)</li>
+          <li>Ridge &amp; Eaves System</li>
+          <li>Gutters &amp; Downpipes</li>
+          <li>Flashings &amp; Sealing</li>
+          <li>Insulation &amp; Fasteners</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>FAMAD PLC Industrial Facility &mdash; Confidential Technical Report</p>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-prev" id="lbPrev">&#8249;</button>
+  <button class="lb-next" id="lbNext">&#8250;</button>
+  <div class="lb-img-wrap"><img id="lbImg" src="" alt="Enlarged view" /></div>
+</div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
