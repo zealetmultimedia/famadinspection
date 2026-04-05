@@ -11,12 +11,12 @@ BASE = r"E:\CLIENT JOBS\FAMAD\FAMAD-INSPEECTION-WEBSITE"
 STRUCTURES = [
     {"label": "A", "name": "Kinstar / Lontor Offices",
      "perimeter": "186.66", "area": "1,243.54", "roof": "1,189.7",
-     "pictures": ["A-PICTURE1.JPG", "A-PICTURE2.JPG", "A-PICTURE3.JPG", "A-PICTURE4.JPG"],
+     "pictures": ["A-PICTURE1.JPG", "A-PICTURE2.JPG", "A-PICTURE3.JPG", "A-PICTURE4.JPG", "A-PICTURE5.JPG"],
      "measurements": ["A-MEASUREMENT1.jpg", "A-MEASUREMENT2.jpg"]},
 
     {"label": "B", "name": "FAMAD Central Store",
      "perimeter": "80.759", "area": "387.65", "roof": "373.6",
-     "pictures": ["B-PICTURE1.JPG", "B-PICTURE2.JPG"],
+     "pictures": ["B-PICTURE1.JPG", "B-PICTURE2.JPG", "B-PICTURE3.JPG"],
      "measurements": ["B-MEASUREMENT1.jpg", "B-MEASUREMENT2.jpg"]},
 
     {"label": "C", "name": "GAC Motors",
@@ -33,18 +33,18 @@ STRUCTURES = [
      "perimeter": "464.581", "area": "12,963.32", "roof": "13,868.07",
      "featured": True,
      "estimation": "estimation-e.html",
-     "pictures": ["E-PICTURE1.JPG", "E-PICTURE2.JPG", "E-PICTURE3.JPG", "E-PICTURE4.JPG", "E-PICTURE5.JPG"],
+     "defects": ["E-DEFECT1.JPG","E-DEFECT2.JPG","E-DEFECT3.JPG","E-DEFECT4.JPG",
+                 "E-DEFECT5.JPG","E-DEFECT6.JPG","E-DEFECT7.JPG","E-DEFECT8.JPG",
+                 "E-DEFECT9.JPG","E-DEFECT10.JPG","E-DEFECT11.JPG","E-DEFECT12.JPG",
+                 "E-DEFECT13.JPG","E-DEFECT14.JPG","E-DEFECT15.JPG","E-DEFECT16.JPG",
+                 "E-DEFECT17.JPG","E-DEFECT18.JPG"],
+     "pictures": ["E-PICTURE1.jpg", "E-PICTURE2.JPG", "E-PICTURE3.JPG", "E-PICTURE4.JPG", "E-PICTURE5.JPG", "E-PICTURE6.JPG", "E-PICTURE7.JPG"],
      "measurements": ["E-MEASUREMENT1.jpg", "E-MEASUREMENT2.jpg", "E-MEASUREMENT3.jpg",
                       "E-MEASUREMENT4.jpg", "E-MEASUREMENT5.jpg"]},
 
     {"label": "F", "name": "GAC Warehouse",
      "perimeter": "144.612", "area": "940.14", "roof": "960.4",
-     "defects": ["F-DEFECT1.JPG","F-DEFECT2.JPG","F-DEFECT3.JPG","F-DEFECT4.JPG",
-                 "F-DEFECT5.JPG","F-DEFECT6.JPG","F-DEFECT7.JPG","F-DEFECT8.JPG",
-                 "F-DEFECT9.JPG","F-DEFECT10.JPG","F-DEFECT11.JPG","F-DEFECT12.JPG",
-                 "F-DEFECT13.JPG","F-DEFECT14.JPG","F-DEFECT15.JPG","F-DEFECT16.JPG",
-                 "F-DEFECT17.JPG","F-DEFECT18.JPG"],
-     "pictures": ["F-PICTURE1.JPG", "F-PICTURE2.JPG"],
+     "pictures": ["F-PICTURE1.JPG", "F-PICTURE2.JPG", "F-PICTURE3.JPG"],
      "measurements": ["F-MEASUREMENT1.jpg", "F-MEASUREMENT2.jpg", "F-MEASUREMENT3.jpg"]},
 
     {"label": "G", "name": "Kinlife",
@@ -52,17 +52,17 @@ STRUCTURES = [
      "defects": ["G-DEFECT1.JPG","G-DEFECT2.JPG","G-DEFECT3.JPG",
                  "G-DEFECT5.JPG","G-DEFECT6.JPG","G-DEFECT7.JPG"],
 
-     "pictures": ["G-PICTURE1.JPG", "G-PICTURE2.JPG"],
+     "pictures": ["G-PICTURE1.JPG", "G-PICTURE2.JPG", "G-PICTURE3.JPG"],
      "measurements": ["G-MEASUREMENT1.jpg", "G-MEASUREMENT2.jpg"]},
 
     {"label": "H", "name": "Elizabeth R / Gatimo",
      "perimeter": "298.993", "area": "3,656.86", "roof": "3,705.1",
-     "pictures": ["H-PICTURE1.JPG", "H-PICTURE2.JPG"],
+     "pictures": ["H-PICTURE1.JPG", "H-PICTURE2.JPG", "H-PICTURE3.JPG", "H-PICTURE4.JPG"],
      "measurements": ["H-MEASUREMENT1.jpg", "H-MEASUREMENT2.jpg"]},
 
     {"label": "I", "name": "Generator Room",
      "perimeter": "78.32", "area": "294.94", "roof": "329.6",
-     "pictures": ["I-PICTURE1.JPG", "I-PICTURE2.JPG"],
+     "pictures": ["I-PICTURE1.JPG", "I-PICTURE2.JPG", "I-PICTURE3.JPG"],
      "measurements": ["I-MEASUREMENT1.jpg", "I-MEASUREMENT2.jpg"]},
 
     {"label": "J", "name": "MTN-J",
@@ -72,24 +72,24 @@ STRUCTURES = [
 
     {"label": "K", "name": "MTN-K",
      "perimeter": "185.736", "area": "1,877.01", "roof": "1,442.70",
-     "pictures": ["K-PICTURE1.JPG", "K-PICTURE2.JPG"],
+     "pictures": ["K-PICTURE1.JPG", "K-PICTURE2.JPG", "K-PICTURE3.JPG"],
      "measurements": ["K-MEASUREMENT1.jpg", "K-MEASUREMENT2.jpg"]},
 
     {"label": "L", "name": "MTN-L",
      "perimeter": "107.559", "area": "644.21", "roof": "623.3",
      "defects": ["L-DEFECT1.JPG"],
-     "pictures": ["L-PICTURE1.JPG", "L-PICTURE2.JPG"],
+     "pictures": ["L-PICTURE1.JPG", "L-PICTURE2.JPG", "L-PICTURE3.JPG"],
      "measurements": ["L-MEASUREMENT1.jpg", "L-MEASUREMENT2.jpg"]},
 
     {"label": "M", "name": "MTN-M",
      "perimeter": "78.129", "area": "316.48", "roof": "315.6",
-     "pictures": ["M-PICTURE1.JPG", "M-PICTURE2.JPG"],
+     "pictures": ["M-PICTURE1.JPG", "M-PICTURE2.JPG", "M-PICTURE3.JPG", "M-PICTURE4.JPG"],
      "measurements": ["M-MEASUREMENT1.jpg", "M-MEASUREMENT2.jpg"]},
 
     {"label": "N", "name": "MTN-N",
      "perimeter": "130.413", "area": "978.2", "roof": "962.3",
      "defects": ["N-DEFECT1.JPG"],
-     "pictures": ["N-PICTURE1.JPG", "N-PICTURE2.JPG"],
+     "pictures": ["N-PICTURE1.JPG", "N-PICTURE2.JPG", "N-PICTURE3.JPG"],
      "measurements": ["N-MEASUREMENT1.jpg", "N-MEASUREMENT2.jpg"]},
 
     {"label": "O", "name": "MTN-O",

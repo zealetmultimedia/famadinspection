@@ -1998,6 +1998,60 @@ a { text-decoration: none; color: inherit; }
 }
 .map-link:hover { text-decoration: underline; }
 
+/* ── Defect location map ─────────────────────── */
+.defect-map-wrap {
+  background: var(--bg-alt);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.defect-map-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.defect-map-label svg { flex-shrink: 0; }
+
+/* ── Defect map hotspots ─────────────────────── */
+.defect-map-img-wrap {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  line-height: 0;
+}
+.dhs {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2.5px solid transparent;
+  color: transparent;
+  font-size: 0;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  z-index: 10;
+  padding: 0;
+}
+.dhs:hover {
+  background: rgba(249,115,22,0.25);
+  border-color: #f97316;
+  box-shadow: 0 0 0 4px rgba(249,115,22,0.18);
+  transform: translate(-50%, -50%) scale(1.25);
+}
+.dhs:active {
+  background: rgba(249,115,22,0.45);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
 /* ── Video embed ─────────────────────────────── */
 .video-wrap {
   border-radius: 12px;
