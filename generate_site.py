@@ -40,13 +40,17 @@ STRUCTURES = [
     {"label": "F", "name": "GAC Warehouse",
      "perimeter": "144.612", "area": "940.14", "roof": "960.4",
      "defects": ["F-DEFECT1.JPG","F-DEFECT2.JPG","F-DEFECT3.JPG","F-DEFECT4.JPG",
-                 "F-DEFECT5.JPG","F-DEFECT6.JPG","F-DEFECT7.JPG"],
+                 "F-DEFECT5.JPG","F-DEFECT6.JPG","F-DEFECT7.JPG","F-DEFECT8.JPG",
+                 "F-DEFECT9.JPG","F-DEFECT10.JPG","F-DEFECT11.JPG","F-DEFECT12.JPG",
+                 "F-DEFECT13.JPG","F-DEFECT14.JPG","F-DEFECT15.JPG","F-DEFECT16.JPG",
+                 "F-DEFECT17.JPG","F-DEFECT18.JPG"],
      "pictures": ["F-PICTURE1.JPG", "F-PICTURE2.JPG"],
      "measurements": ["F-MEASUREMENT1.jpg", "F-MEASUREMENT2.jpg", "F-MEASUREMENT3.jpg"]},
 
     {"label": "G", "name": "Kinlife",
      "perimeter": "187.957", "area": "1,155.43", "roof": "465.9",
-     "defects": ["G-DEFECT1.JPG"],
+     "defects": ["G-DEFECT1.JPG","G-DEFECT2.JPG","G-DEFECT3.JPG",
+                 "G-DEFECT5.JPG","G-DEFECT6.JPG","G-DEFECT7.JPG"],
      "pictures": ["G-PICTURE1.JPG", "G-PICTURE2.JPG"],
      "measurements": ["G-MEASUREMENT1.jpg", "G-MEASUREMENT2.jpg"]},
 
@@ -72,6 +76,7 @@ STRUCTURES = [
 
     {"label": "L", "name": "MTN-L",
      "perimeter": "107.559", "area": "644.21", "roof": "623.3",
+     "defects": ["L-DEFECT1.JPG"],
      "pictures": ["L-PICTURE1.JPG", "L-PICTURE2.JPG"],
      "measurements": ["L-MEASUREMENT1.jpg", "L-MEASUREMENT2.jpg"]},
 
@@ -82,6 +87,7 @@ STRUCTURES = [
 
     {"label": "N", "name": "MTN-N",
      "perimeter": "130.413", "area": "978.2", "roof": "962.3",
+     "defects": ["N-DEFECT1.JPG"],
      "pictures": ["N-PICTURE1.JPG", "N-PICTURE2.JPG"],
      "measurements": ["N-MEASUREMENT1.jpg", "N-MEASUREMENT2.jpg"]},
 
