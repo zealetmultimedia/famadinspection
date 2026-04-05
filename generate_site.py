@@ -51,6 +51,7 @@ STRUCTURES = [
      "perimeter": "187.957", "area": "1,155.43", "roof": "465.9",
      "defects": ["G-DEFECT1.JPG","G-DEFECT2.JPG","G-DEFECT3.JPG",
                  "G-DEFECT5.JPG","G-DEFECT6.JPG","G-DEFECT7.JPG"],
+
      "pictures": ["G-PICTURE1.JPG", "G-PICTURE2.JPG"],
      "measurements": ["G-MEASUREMENT1.jpg", "G-MEASUREMENT2.jpg"]},
 
